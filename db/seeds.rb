@@ -8,14 +8,15 @@
 require 'faker'
 
 puts 'Destroying old restaurants...'
-Restaurants.destroy_all
+Restaurant.destroy_all
 
 puts 'Creating 5 fake restaurants...'
 5.times do
   restaurant = Restaurant.new(
     name: Faker::Company.name,
     address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
-    rating: rand(0..5)
+    phone_number: Faker::PhoneNumber.phone_number.to_i,
+    category: %w[chinese italian japanese french belgian].sample
   )
   restaurant.save!
 end
